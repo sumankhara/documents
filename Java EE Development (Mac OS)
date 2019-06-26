@@ -1,0 +1,111 @@
+Java EE Development (Mac OS)
+
+1. Download Wildfly community edition (zip file) and unzip it.
+
+2. Go to the bin folder and run ./add-user.sh to add a new admin user.
+
+	M1705008:bin sk040459$ ./add-user.sh 
+
+	What type of user do you wish to add? 
+	 a) Management User (mgmt-users.properties) 
+	 b) Application User (application-users.properties)
+	(a): 
+
+	Enter the details of the new user to add.
+	Using realm 'ManagementRealm' as discovered from the existing property files.
+	Username : suman
+
+	Password recommendations are listed below. To modify these restrictions edit the add-user.properties configuration file.
+	 - The password should be different from the username
+	 - The password should not be one of the following restricted values {root, admin, administrator}
+	 - The password should contain at least 8 characters, 1 alphabetic character(s), 1 digit(s), 1 non-alphanumeric symbol(s)
+	Password : 
+
+	WFLYDM0102: Password should have at least 1 non-alphanumeric symbol.
+	Are you sure you want to use the password entered yes/no? yes
+
+	Re-enter Password : 
+
+	What groups do you want this user to belong to? (Please enter a comma separated list, or leave blank for none)[  ]: 
+
+	About to add user 'suman' for realm 'ManagementRealm'
+	Is this correct yes/no? yes
+
+	Added user 'suman' to file '/Users/sk040459/Documents/Software/wildfly-11.0.0.Final/standalone/configuration/mgmt-users.properties'
+	Added user 'suman' to file '/Users/sk040459/Documents/Software/wildfly-11.0.0.Final/domain/configuration/mgmt-users.properties'
+	Added user 'suman' with groups  to file '/Users/sk040459/Documents/Software/wildfly-11.0.0.Final/standalone/configuration/mgmt-groups.properties'
+	Added user 'suman' with groups  to file '/Users/sk040459/Documents/Software/wildfly-11.0.0.Final/domain/configuration/mgmt-groups.properties'
+	Is this new user going to be used for one AS process to connect to another AS process? 
+	e.g. for a slave host controller connecting to the master or for a Remoting connection for server to server EJB calls.
+
+	yes/no? no
+
+3. Now run ./standalone.sh to start the server. Go to http://localhost:8080/ and click on "Administration Console". Enter login credentials.
+
+4. Inside your workspace run the following maven command
+
+mvn -DarchetypeGroupId=org.codehaus.mojo.archetypes -DarchetypeArtifactId=webapp-javaee7 -DarchetypeVersion=1.1 -DgroupId=com.pluralsight.javaee-getting-started -DartifactId=bookstore-back -Dversion=1.0 -Darchetype.interactive=false --batch-mode -Dpackage=com.pluralsight.bookstore archetype:generate
+
+5. Import maven project into Eclipse
+
+6. Run mvn package to create a war file.
+
+7. Deploy the war file in Wildfly by clicking the Deployments tab and then adding the war file.
+
+8. To use MySql as the database server follow the below steps:
+
+	a) Add the following dependency
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.47</version>
+		</dependency>
+
+	b) Follow the below link to configure a new datasource
+	https://lucasmarques.me/mysql-wildfly-datasource/
+
+	c) Change the default datasource by logging into Wildfly Admin console (http://localhost:9990/console/App.html#home). Go to Configuration -> Subsystems -> EE -> Click View -> Default Bindings -> Edit the Datasource
+	The new datasource name can be obtained from by going to Configuration -> Subsystems -> Datasources -> Non-XA -> click <datasource name>
+
+	d) The persistence.xml file should be similar to below:
+
+		<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+			<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+				xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.1"
+				xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+
+				<persistence-unit name="bookStorePU" transaction-type="JTA">
+					<properties>
+						<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+						<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:6000/bookstore"/>
+						<property name="javax.persistence.jdbc.user" value="root" />
+						<property name="javax.persistence.jdbc.password" value="su1028kh" />
+						<property name="hibernate.hbm2ddl.auto" value="update" />
+			            <property name="hibernate.show_sql" value="true" />
+			            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
+						<property name="javax.persistence.schema-generation.database.action"
+							value="drop-and-create" />
+						<property name="javax.persistence.schema-generation.scripts.action"
+							value="drop-and-create" />
+						<property name="javax.persistence.schema-generation.scripts.create-target"
+							value="bookStoreCreate.ddl" />
+						<property name="javax.persistence.schema-generation.scripts.drop-target"
+							value="bookStoreDrop.ddl" />
+						<property name="javax.persistence.sql-load-script-source"
+							value="import.sql" />
+					</properties>
+				</persistence-unit>
+			</persistence>
+
+———————————————————————————————————————————————————————————————————————————————————————————
+Creating Angular Frontend
+
+1. Install Node.JS and Angular CLI
+
+2. Run ng new bookstore-front --skip-git --prefix bs --skip-tests --routing true --inline-style
+
+3. cd to the newly created directory
+
+4. Run npm install jquery popper bootstrap@4
+
+5. Create new components by running ng generate component book-form --skipTests true --inline-style
