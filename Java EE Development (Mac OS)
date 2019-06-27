@@ -109,3 +109,5 @@ Creating Angular Frontend
 4. Run npm install jquery popper bootstrap@4
 
 5. Create new components by running ng generate component book-form --skipTests true --inline-style
+
+6. swagger-codegen generate -i bookstore-back/src/main/webapp/swagger.json -l typescript-angular2 -o bookstore-front/src/app/service
