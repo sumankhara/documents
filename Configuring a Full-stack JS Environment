@@ -1,0 +1,56 @@
+Configuring a Full-stack JS Environment: Server Side
+
+1. mkdir advanced-react
+
+2. mkdir lib
+
+3. mkdir public
+
+4. touch lib/server.js
+
+5. yarn init
+
+question name (advanced-react): 
+question version (1.0.0): 
+question description: Advanced React
+question entry point (index.js): lib/server.js
+question repository url: 
+question author (Suman Khara): 
+question license (MIT): 
+question private:
+
+6. yarn add --dev eslint
+
+7. Add a .eslintrc.js file in the root directory. Copy from https://github.com/samerbuna/.files/blob/master/.eslintrc.js
+
+8. yarn add --dev eslint-plugin-react babel-eslint
+
+9. yarn add express ejs
+
+10. yarn add pm2 (On windows use nodemon npm i -g nodemon)
+
+11. yarn dev
+
+12. yarn pm2 logs
+
+13. yarn add babel-cli babel-preset-react babel-preset-env babel-preset-stage-2
+
+Configuring a Full-stack JS Environment: Client Side
+
+1. Create a directory named components under lib
+
+2. Create Index.js under components (starting point of our React App)
+
+3. yarn add react react-dom webpack
+
+4. yarn add babel-loader
+
+5. yarn add babel-polyfill
+
+6. test data - https://bit.ly/react-blog-test-data
+
+7. brew install wget
+
+8. Load test date - wget -O lib/testData.json bit.ly/react-blog-test-data
+
+9. yarn add --dev jest

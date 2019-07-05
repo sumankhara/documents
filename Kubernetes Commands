@@ -1,0 +1,9 @@
+Kubernetes Commands
+
+1. minikube start --vm-driver=xhyve
+
+2. kubectl config current-context
+
+3. kubectl get nodes (lists all nodes)
+
+4. minikube stop

@@ -1,0 +1,40 @@
+Docker commands
+
+1. To list docker images
+	docker images
+
+2. To list running docker containers
+	docker ps
+	
+3. To stop a docker container
+	docker stop <docker id>
+	
+4. To delete dangling docker images
+	docker system prune
+	
+5. To run a docker container and map a host port to docker port
+	docker run -p Hostport:Dockerport <image name>
+	
+	docker run -p 8080:8080 financialclearance/eligibility-request-service
+
+	docker run -p 9000:9000 millenium
+	
+6. To inspect a docker image
+	docker inspect <docker id>
+
+7. To remove/delete a docker image
+	docker rmi <image id>
+
+8. Docker help
+	docker help
+	docker <command> —help
+
+9. Download and run an NGINX container
+	docker image pull nginx
+	docker container run -d —name nginx-test -p 8080:80 nginx
+
+10. Build a Docker image
+	docker build -t friendlyhello .
+
+11. Login Cerner docker repository
+	docker login -u SK040459 -p Kalimpong@1234 docker-snapshot.cernerrepos.net
