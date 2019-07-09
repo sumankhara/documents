@@ -5,20 +5,20 @@ Docker commands
 
 2. To list running docker containers
 	docker ps
-	
+
 3. To stop a docker container
 	docker stop <docker id>
-	
+
 4. To delete dangling docker images
 	docker system prune
-	
+
 5. To run a docker container and map a host port to docker port
 	docker run -p Hostport:Dockerport <image name>
-	
+
 	docker run -p 8080:8080 financialclearance/eligibility-request-service
 
 	docker run -p 9000:9000 millenium
-	
+
 6. To inspect a docker image
 	docker inspect <docker id>
 
@@ -38,3 +38,81 @@ Docker commands
 
 11. Login Cerner docker repository
 	docker login -u SK040459 -p Kalimpong@1234 docker-snapshot.cernerrepos.net
+
+12. Searching for images
+		- https://hub.docker.com/explore/
+		- docker search (docker search mongo)
+
+13. docker run mongo
+
+14. Building Images
+
+	Docker Commit
+
+	a) Run a container from the ubuntu:16.04 and connect it to its command line
+
+		docker run -i -t ubuntu:16.04 /bin/bash
+
+	b) Install the Git toolkit
+
+		apt-get update
+
+		apt-get install -y git
+
+	c) Check if the Git toolkit is installed
+
+		which git
+
+	d) Exit the container
+
+		exit
+
+	e) Check what has changed in the container comparing it to the ubuntu image
+
+		docker diff dee2cb192c6c
+
+	f) Commit the container to a new image
+
+		docker commit dee2cb192c6c ubuntu_with_git
+
+	g) docker images
+
+	h) docker run -it ubuntu_with_git /bin/bash
+
+		apt-get install -y openjdk-8-jdk
+
+		exit
+
+		docker commit dee2cb192c6c ubuntu_with_git_and_jdk
+
+	Dockerfile
+
+	a) Create a new directory and a file called Dockerfile with the following content:
+
+		FROM ubuntu:16.04
+		RUN apt-get update && \
+			apt-get install -y python
+
+	b) Run the command to create the ubuntu_with_python image:
+
+		docker build -t ubuntu_with_python .
+
+	c) Check the image was created:
+
+		docker images
+
+	d) Guide to all Dockerfile instructions - https://docs.docker.com/engine/reference/builder
+
+	Complete Docker Application
+	a) Create a folder
+	b) Create a file hello.py with the following content:
+		print("Hello World from python!")
+	c) Create a Dockerfile in the same folder with the following content:
+		FROM ubuntu:16.04
+		MAINTAINER Suman Khara
+		RUN apt-get update && \
+			apt-get install -y python
+		COPY hello.py .
+		ENTRYPOINT ["python", "hello.py"]
+	d) docker build -t hello_world_python .
+	e) docker run hello_world_python
