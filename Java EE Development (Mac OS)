@@ -19,12 +19,12 @@ Java EE Development (Mac OS)
 	 - The password should be different from the username
 	 - The password should not be one of the following restricted values {root, admin, administrator}
 	 - The password should contain at least 8 characters, 1 alphabetic character(s), 1 digit(s), 1 non-alphanumeric symbol(s)
-	Password : 
+	Password : su1028kh
 
 	WFLYDM0102: Password should have at least 1 non-alphanumeric symbol.
 	Are you sure you want to use the password entered yes/no? yes
 
-	Re-enter Password : 
+	Re-enter Password : su1028kh
 
 	What groups do you want this user to belong to? (Please enter a comma separated list, or leave blank for none)[  ]: 
 
@@ -65,7 +65,7 @@ mvn -DarchetypeGroupId=org.codehaus.mojo.archetypes -DarchetypeArtifactId=webapp
 	https://lucasmarques.me/mysql-wildfly-datasource/
 
 	c) Change the default datasource by logging into Wildfly Admin console (http://localhost:9990/console/App.html#home). Go to Configuration -> Subsystems -> EE -> Click View -> Default Bindings -> Edit the Datasource
-	The new datasource name can be obtained from by going to Configuration -> Subsystems -> Datasources -> Non-XA -> click <datasource name>
+	The new datasource name can be obtained from by going to Configuration -> Subsystems -> Datasources -> Non-XA -> click <datasource name>  (e.g. java:jboss/datasources/bookstore-ds)
 
 	d) The persistence.xml file should be similar to below:
 
@@ -81,8 +81,8 @@ mvn -DarchetypeGroupId=org.codehaus.mojo.archetypes -DarchetypeArtifactId=webapp
 						<property name="javax.persistence.jdbc.user" value="root" />
 						<property name="javax.persistence.jdbc.password" value="su1028kh" />
 						<property name="hibernate.hbm2ddl.auto" value="update" />
-			            <property name="hibernate.show_sql" value="true" />
-			            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
+			            		<property name="hibernate.show_sql" value="true" />
+			            		<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
 						<property name="javax.persistence.schema-generation.database.action"
 							value="drop-and-create" />
 						<property name="javax.persistence.schema-generation.scripts.action"

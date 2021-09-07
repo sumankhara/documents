@@ -1,3 +1,22 @@
+Minikube Installation on Darwin
+
+1. brew install hyperkit
+
+2. brew install minikube
+
+3. sudo mv /usr/local/Cellar/minikube/1.11.0/bin/minikube /usr/local/bin
+
+4. minikube config set driver hyperkit
+
+5. sudo minikube delete
+
+6. minikube start --driver=hyperkit
+
+7. kubectl version
+
+8. kubectl config set-context --current --namespace=revcycle-eng
+
+
 Kubernetes Commands
 
 1. minikube start --vm-driver=xhyve
@@ -7,3 +26,27 @@ Kubernetes Commands
 3. kubectl get nodes (lists all nodes)
 
 4. minikube stop
+
+5. minikube ip
+
+Creating/Running a Pod
+
+1. kubectl apply -f first-pod.yml
+
+2. kubectl describe pod webapp
+
+3. kubectl exec webapp ls
+
+4. kubectl delete pod queue
+
+5. kubectl delete service fleetman-webapp
+
+6. kubectl delete po --all
+
+7. kubectl describe rs webapp
+
+8. kubectl rollout status deploy webapp
+
+9. kubectl rollout history deploy webapp
+
+10. kubectl rollout undo deploy webapp (back to the previous version)

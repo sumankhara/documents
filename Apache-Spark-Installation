@@ -1,0 +1,15 @@
+Apache Spark Installation (Mac)
+
+1. brew install apache-spark
+
+2. For v3.1.2, Apache Spark's home directory will be in /usr/local/Cellar/apache-spark/3.1.2
+
+3. Run the Spark shell
+
+cd /usr/local/Cellar/apache-spark/3.1.2
+
+cd bin/
+
+./spark-shell
+
+4. Press Ctrl-C to exit Spark shell
